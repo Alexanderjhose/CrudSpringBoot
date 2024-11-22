@@ -1,0 +1,14 @@
+		EntityManager entityManager = UtilClases.getInstancia(IFabricaEntidad.class).getEntityManager();
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+
+		CriteriaQuery<EntFactura> criteriaQueryFactura = criteriaBuilder.createQuery(EntFactura.class);
+		Root<EntFactura> rootFactura = criteriaQueryFactura.from(EntFactura.class);
+		
+		criteriaQueryFactura.select(rootFactura);
+		
+		Predicate predicateUnidadDeSuministro = criteriaBuilder.equal(rootFactura.get("unidadSuministro").get("id"), unidadSuministro.getId());
+		Predicate predicateProveedor = criteriaBuilder.equal(rootFactura.get("proveedor").get("codigoProveedor"), codigoProveedor);
+		
+		criteriaQueryFactura.where(criteriaBuilder.and(predicateUnidadDeSuministro, predicateProveedor));
+		
+		return entityManager.createQuery(criteriaQueryFactura).getResultList();
