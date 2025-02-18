@@ -6,6 +6,7 @@ package com.example.demo.controlador;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,9 +27,14 @@ public class ProductoControlador {
 		this.servicioImp = servicioImp;
 	}
 
-	@GetMapping("/lista")
-	public List<Producto> ListProduct() {
-		return servicioImp.listaProducto();
+	@GetMapping("/orderAsc")
+	public List<Producto> getAllProductByOrderAsc() {
+		return servicioImp.getAllProductByOrderAsc();
+	}
+
+	@GetMapping("/isActive/{isActive}")
+	public List<Producto> getProductByIsActive(@PathVariable boolean isActive) {
+		return servicioImp.getProductByIsActive(isActive);
 	}
 
 }

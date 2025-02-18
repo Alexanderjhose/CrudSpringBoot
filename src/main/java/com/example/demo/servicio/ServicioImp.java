@@ -16,7 +16,16 @@ public class ServicioImp {
 		this.repositorio = repositorio;
 	}
 
-	public List<Producto> listaProducto() {
-		return repositorio.findAll();
+	public List<Producto> getAllProductByOrderAsc() {
+		return repositorio.findAllOrderByIdAsc();
 	}
+
+	public List<Producto> getProductByIsActive(boolean isActive) {
+		return repositorio.findByIsActivo(isActive);
+	}
+
+	public Producto createProduct(Producto producto) {
+		return repositorio.save(producto);
+	}
+
 }
